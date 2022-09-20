@@ -13,8 +13,15 @@
 String name=request.getParameter("name");
 String email=request.getParameter("email");
 String pass=request.getParameter("pass");
+
 try{
+	
 UserDao db=new UserDao();
+if(db.checkEmail(email))
+{
+	out.print("Email Already Registor");
+}
+else{
 
 User u=new User(name,email,pass);
 
@@ -28,9 +35,14 @@ else
 {
 	out.print("data not inserted");
 }
-} catch (Exception e) {
+
+}
+
+} 
+catch (Exception e) {
 	e.printStackTrace();
 }
+
 %>
 
 </body>
