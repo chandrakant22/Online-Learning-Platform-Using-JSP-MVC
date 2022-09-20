@@ -19,7 +19,8 @@ try{
 UserDao db=new UserDao();
 if(db.checkEmail(email))
 {
-	out.print("Email Already Registor");
+	out.print("<script>alert('Email Already Registor') </script>");
+	request.getRequestDispatcher("index.jsp").include(request, response);
 }
 else{
 
@@ -51,6 +52,5 @@ catch (Exception e) {
 <!-- 
 ToDo
 
-1. No duplicate email register
 2. CSS padding or margin reduce
  -->
