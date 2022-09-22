@@ -24,7 +24,8 @@ if(a)
 }
 else
 {
-	out.print("Wrong username and password");
+	out.print("<script>alert('Wrong username and password') </script>");
+	request.getRequestDispatcher("login.jsp").include(request, response);
 }
 } catch (Exception e) {
 	e.printStackTrace();
@@ -32,3 +33,5 @@ else
 %>
 </body>
 </html>
+
+<!-- add pop notification -->
