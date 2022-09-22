@@ -25,7 +25,7 @@
 			session.setAttribute( "pass", pass);
 			//end session
 			
-			out.print("Welcome User : "+email); //we are adding profile/dashboard 
+			response.sendRedirect("profile.jsp");//we are adding profile/dashboard -done 
 		}
 		else
 		{

@@ -18,7 +18,7 @@
 
 <%
 
-if(session!=null)
+if(session.getAttribute("email")!=null)
 {
 	response.sendRedirect("profile.jsp");
 }

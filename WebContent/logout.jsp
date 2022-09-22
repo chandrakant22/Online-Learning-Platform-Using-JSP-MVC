@@ -7,7 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-welcome prfile 
-<a href="logout.jsp">Logout</a>
+<%
+session.removeAttribute("email");
+session.removeAttribute("pass");
+session.invalidate();
+request.getSession(false);
+
+response.sendRedirect("index.jsp");
+%>
+
+hello logout
 </body>
 </html>
