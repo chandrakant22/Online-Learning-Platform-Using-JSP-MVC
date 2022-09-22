@@ -13,25 +13,73 @@
 String email=request.getParameter("uname");
 String pass=request.getParameter("upass");
 
-try{
-UserDao db=new UserDao();
 
-boolean a= db.checkUser(email,pass);
-
-if(a)
+if(session==null)
 {
-	out.print("Welcome User : "+email);
+	try{
+		UserDao db=new UserDao();
+
+		boolean a= db.checkUser(email,pass);
+
+		if(a)
+		{
+			//adding user name and pass in session object
+			session.setAttribute( "email", email);
+			session.setAttribute( "pass", pass);
+			//end session
+			
+			out.print("Welcome User : "+email); //we are adding profile/dashboard 
+		}
+		else
+		{
+			out.print("<script>alert('Wrong username and password') </script>");
+			request.getRequestDispatcher("login.jsp").include(request, response);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 }
 else
 {
-	out.print("<script>alert('Wrong username and password') </script>");
-	request.getRequestDispatcher("login.jsp").include(request, response);
+
+	
+	String semail=(String)session.getAttribute("email");
+	String spass=(String)session.getAttribute("pass");
+
+	if(semail.equals("") && spass.equals(""))
+	{
+		try{
+			UserDao db=new UserDao();
+
+			boolean a= db.checkUser(email,pass);
+
+				if(a)
+				{
+					//adding user name and pass in session object
+					session.setAttribute( "email", email);
+					session.setAttribute( "pass", pass);
+					//end session
+		
+					out.print("Welcome User : "+semail); //we are adding profile/dashboard 
+				}
+				else
+				{
+					out.print("<script>alert('Wrong username and password') </script>");
+					request.getRequestDispatcher("login.jsp").include(request, response);
+				}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	}
+	else
+	{
+			out.print("Welcome User : "+semail); //we are adding profile/dashboard 
+	}
 }
-} catch (Exception e) {
-	e.printStackTrace();
-}
+
 %>
 </body>
 </html>
 
-<!-- add pop notification -->
+<!-- add pop notification - done -->
