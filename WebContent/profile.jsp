@@ -7,7 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-welcome prfile 
-<a href="logout.jsp">Logout</a>
+<%
+if(session.getAttribute("email")!=null)
+{	
+%>
+
+welcome prfile  <a href="logout.jsp">Logout</a>
+
+<%}
+else
+{
+	out.print("<script>alert('Please Login first') </script>");
+	request.getRequestDispatcher("login.jsp").include(request, response);
+}
+%>
 </body>
 </html>
