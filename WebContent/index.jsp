@@ -14,7 +14,7 @@
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body> <!-- total registration -->
 
 <%
 if(session.getAttribute("email")==null)
