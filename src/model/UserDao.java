@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
 	
@@ -81,11 +83,42 @@ public class UserDao {
 	}
 	
 	
+	
+	public List<User> getAllUser() throws ClassNotFoundException, SQLException
+	{
+		String sql = "select * from user";
+		con = getConnect();
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+		
+		List<User> uls=new ArrayList<User>();
+		
+		while(rs.next())
+		{
+			User u=new User();
+			u.setUid(rs.getInt(1));
+			u.setFullName(rs.getString(2));
+			u.setPassword(rs.getString(4));
+			u.setEmail(rs.getString(3));
+			
+			uls.add(u);
+			
+		}
+
+		con.close();
+	
+		return uls;
+	}
+	
+	
+	
+	
 }
 
 /* 
  * Student count -done
- * Courses Count (courses table) 
- * Courses Purchase Count (purchase table) 
- * Total Mentors Count (mentor table) 
+ * Courses Count (courses table) cid cname
+ * Courses Purchase Count (purchase table) pid uid cid
+ * Total Mentors Count (mentor table)  
  */
