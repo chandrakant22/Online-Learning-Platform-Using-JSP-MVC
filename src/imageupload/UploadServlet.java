@@ -3,6 +3,7 @@ package imageupload;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,7 +16,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import javax.servlet.http.Part;
 
-import com.oreilly.servlet.MultipartRequest;
+
+import model.Course;
+import model.CourseDao;
 
 @MultipartConfig
 @WebServlet("/UploadServlet")
@@ -97,7 +100,23 @@ public class UploadServlet extends HttpServlet {
 		String totalenroll=request.getParameter("totalenroll");
 		String fees=request.getParameter("fees");
 		
-		
+		Course c=new Course(coursetitle, instructor, category, totalenroll, fees, fileName);
+		CourseDao db=new CourseDao();
+		try {
+			int a= db.insert(c);
+			
+			if(a>0)
+			{
+				System.out.println("Course Added");
+			}
+			else
+			{
+				System.out.println("Problem while Adding Course");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
